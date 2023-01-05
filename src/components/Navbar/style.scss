@@ -1,0 +1,93 @@
+.navbar-main {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  //   padding: 0px 30px;
+  background: #ffffff;
+  box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
+  .firstContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    .navbar-logoContainer {
+      padding-left: 20px;
+      display: flex;
+      gap: 10px;
+      .navbar-UnionLogo {
+        height: 20px;
+        width: 20px;
+      }
+      .navbar-LendsqrLogo {
+        height: 30px;
+      }
+    }
+    .navbar-search {
+      display: flex;
+      input {
+        width: 344px;
+        height: 40px;
+        background: #ffffff;
+        opacity: 0.2;
+        border: 1px solid #213f7d;
+        border-radius: 8px 0px 0px 8px;
+        padding: 12px 0px 12px 20px;
+        ::placeholder {
+          font-family: "Work Sans";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 16px;
+          color: #545f7d;
+          opacity: 0.7;
+        }
+      }
+      .navbar-searchIcon {
+        display: flex;
+        justify-content: center;
+
+        align-items: center;
+        background: #39cdcc;
+        height: 40px;
+        cursor: pointer;
+        width: 56px;
+        border-radius: 0px 8px 8px 0px;
+      }
+    }
+  }
+  .navbar-utilities {
+    display: flex;
+    justify-content: space-evenly;
+    width: 30%;
+    align-items: center;
+    .navbar-notificationIcon {
+      width: 19.67px;
+      height: 22.74px;
+    }
+    .navbar-userDetailsWraper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      .navbar-userIcon {
+        height: 50px;
+        width: 53px;
+        border-radius: 50%;
+      }
+      .navbar-userName {
+        font-family: "Work Sans";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #213f7d;
+      }
+      .navbar-dropDown {
+        height: 4.148512840270996px;
+        width: 7.335150241851807px;
+        cursor: pointer;
+      }
+    }
+  }
+}
