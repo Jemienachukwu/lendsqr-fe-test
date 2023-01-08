@@ -1,0 +1,47 @@
+@import "../variables/variables.scss";
+.sideBar {
+  height: 75vh;
+  padding: 39px 0px;
+  color: $dark-color;
+  overflow: scroll;
+
+  .sidebar-tabHeaders {
+    margin-left: 26px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+  }
+  .sideBar-topContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 26px 0px;
+  }
+  .sidebar-Tab {
+    padding: 0px 20px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(57, 205, 204, 0.06);
+    }
+  }
+
+  .sidebar-currentTab {
+    padding: 0px 20px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: $dark-color;
+    background: rgba(57, 205, 204, 0.06);
+    border-left: 3px solid $light-color;
+  }
+}
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}

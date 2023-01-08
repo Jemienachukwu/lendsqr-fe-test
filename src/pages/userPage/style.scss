@@ -1,0 +1,153 @@
+@import "../../components/variables/variables.scss";
+$light-blue: #39cdcc;
+$light-red: #e4033b;
+
+.userDetails {
+  height: 1000px;
+  .user-goback {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #545f7d;
+  }
+  .user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .user-detailsText {
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 28px;
+      color: $dark-color;
+    }
+    .user-state {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      .user-blacklist,
+      .user-activatelist {
+        width: 170px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid $light-red;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: $light-red;
+      }
+      .user-activatelist {
+        border: 1px solid $light-blue;
+        color: $light-blue;
+      }
+    }
+  }
+  .user-details {
+    height: 210px;
+    padding: 30px 30px 0px 30px;
+    background: #ffffff;
+    margin: 50px 0px;
+    border: 1px solid rgba(33, 63, 125, 0.06);
+    box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .details-topContainer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 70%;
+
+      .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        img {
+          height: 100px;
+          border-radius: 50%;
+          width: 100px;
+        }
+        .profile-username {
+          h1 {
+            font-weight: 500;
+            font-size: 22px;
+            line-height: 26px;
+            color: $dark-color;
+            margin-bottom: 2px;
+          }
+          p {
+            margin-top: 2px;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 16px;
+            color: #545f7d;
+          }
+        }
+      }
+      .user-tier {
+        height: max-content;
+        padding: 0px 30px;
+        border-right: 1px solid $light-color;
+        border-left: 1px solid $light-color;
+        p {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 16px;
+          color: #545f7d;
+          margin-bottom: 2px;
+        }
+        span {
+          margin-top: 2px;
+        }
+      }
+      .user-balance {
+        h2 {
+          font-weight: 500;
+          font-size: 22px;
+          line-height: 26px;
+          color: $dark-color;
+          margin-bottom: 2px;
+        }
+        p {
+          margin-top: 2px;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 14px;
+          color: $dark-color;
+        }
+      }
+    }
+    .user-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      top: 17.8px;
+      height: 30px;
+      li {
+        height: 28px;
+        list-style-type: none;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        text-align: center;
+        padding: 0px 12px;
+        color: rgba(0, 0, 0, 0.8);
+        cursor: pointer;
+        &:first-child {
+          color: #39cdcc;
+          border-bottom: 5px solid $light-color;
+        }
+      }
+    }
+  }
+}

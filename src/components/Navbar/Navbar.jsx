@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
   return (
     <div className="navbar-main">
-      <div className="firstContainer">
+      <div className="first-Container">
         <div className="navbar-logoContainer">
           <img src={union} alt="img" className="navbar-UnionLogo" />
           <img src={lendsqr} alt="img" className="navbar-LendsqrLogo" />
@@ -23,13 +23,13 @@ const NavBar = () => {
         </div>
       </div>
       <div className="navbar-utilities">
-        <Link>Docs</Link>
+        <Link className="navbar-docs">Docs</Link>
         <img
           src={notification}
           alt="notification"
           className="navbar-notificationIcon"
         />
-        <span className="navbar-userDetailsWraper">
+        <span className="navbar-userDetailsWrapper">
           <img src={user} alt="user" className="navbar-userIcon" />
           <h3 className="navbar-userName">users name</h3>
           <img src={dropDown} alt="drop" className="navbar-dropDown" />

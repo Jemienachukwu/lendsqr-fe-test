@@ -1,6 +1,25 @@
-$primary-color: #39cdcc;
+@import "./components//variables/variables.scss";
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
+$font-family: "work sans";
 .app {
-  margin: 0px;
-  box-sizing: border-box;
-  padding: 0px;
+  // overflow: hidden;
+  font-family: $font-family;
+  font-style: normal;
+  @media (max-width: 1500px) {
+    max-width: 1500px;
+  }
+
+  .sidebarContainer {
+    height: max-content;
+    width: 283px;
+  }
+  .parentContainer {
+    padding: 60px;
+    width: 70vw;
+    height: 640px;
+  }
+}
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
