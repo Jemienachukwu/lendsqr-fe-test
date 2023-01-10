@@ -7,10 +7,14 @@ import notification from "./imgs/notification.png";
 import user from "./imgs/image 4.png";
 import dropDown from "./imgs/dropDown.png";
 import { Link } from "react-router-dom";
-const NavBar = () => {
+const NavBar = ({ showSide, setShowSide }: any) => {
   return (
     <div className="navbar-main">
       <div className="first-Container">
+        <div className="navbar-ham" onClick={() => setShowSide(!showSide)}>
+          &#9776;
+        </div>
+
         <div className="navbar-logoContainer">
           <img src={union} alt="img" className="navbar-UnionLogo" />
           <img src={lendsqr} alt="img" className="navbar-LendsqrLogo" />
@@ -23,7 +27,9 @@ const NavBar = () => {
         </div>
       </div>
       <div className="navbar-utilities">
-        <Link className="navbar-docs">Docs</Link>
+        <Link to="#" className="navbar-docs">
+          Docs
+        </Link>
         <img
           src={notification}
           alt="notification"
@@ -31,7 +37,7 @@ const NavBar = () => {
         />
         <span className="navbar-userDetailsWrapper">
           <img src={user} alt="user" className="navbar-userIcon" />
-          <h3 className="navbar-userName">users name</h3>
+          <h3 className="navbar-userName">Adedeji</h3>
           <img src={dropDown} alt="drop" className="navbar-dropDown" />
         </span>
       </div>

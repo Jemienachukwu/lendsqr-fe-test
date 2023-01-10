@@ -12,11 +12,27 @@ $font-family: "work sans";
   .sidebarContainer {
     height: max-content;
     width: 283px;
+    transition: width 0.15s ease-in-out;
+    @media (max-width: 900px) {
+      background: #ffffff;
+      box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
+    }
+  }
+  .sidebarContainer1 {
+    @media (max-width: 900px) {
+      width: 0px;
+      transition: width 0.15s ease-in-out;
+    }
   }
   .parentContainer {
     padding: 60px;
     width: 70vw;
-    height: 640px;
+    height: max-content;
+    overflow: hidden;
+    @media (max-width: 900px) {
+      width: 100vw;
+      padding: 20px;
+    }
   }
 }
 ::-webkit-scrollbar {

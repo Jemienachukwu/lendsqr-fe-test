@@ -22,8 +22,10 @@ import decisions from "./imgs/Vectordecision.png";
 import fees from "./imgs/Vectorfees.png";
 import loan from "./imgs/Vectorloan.png";
 import vector from "./imgs/Vector.png";
+import avatar from "./imgs/avatar.png";
+import dropDown from "./imgs/dropDown.png";
 
-const Sidebar = ({ children }) => {
+const Sidebar = ({ children }: any) => {
   const customers = [
     { text: "Users", img: users },
     { text: "Guarantors", img: guarantors },
@@ -53,6 +55,18 @@ const Sidebar = ({ children }) => {
   ];
   return (
     <div className="sideBar">
+      <div className="mobile-utilities">
+        <div className="avatar">
+          <img src={avatar} alt="user" />
+        </div>
+        <div className="userName">
+          <p>Adedeji</p>
+          <img src={dropDown} alt="drop" className="dropDown" />
+        </div>
+        <div className="searchbar">
+          <input type="search" placeholder="Search for anything" />
+        </div>
+      </div>
       <div className="sideBar-topContainer">
         <div className="sidebar-Tab">
           <img src={briefcase} alt="Organisation" />

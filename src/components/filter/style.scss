@@ -1,0 +1,83 @@
+@import "../../components/variables/variables.scss";
+
+.filter {
+  width: 270px;
+  height: 600px;
+  padding: 30px 20px;
+  background: #ffffff;
+  border: 1px solid rgba(84, 95, 125, 0.14);
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+
+  form {
+    height: 600px;
+    width: 270px;
+    left: 358px;
+    top: 488px;
+    border-radius: 4px;
+    .filter-inputes {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 20px;
+
+      label {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+        color: #545f7d;
+      }
+      input,
+      select {
+        width: 230px;
+        height: 40px;
+        left: 378px;
+        top: 540px;
+        background: #ffffff;
+        opacity: 0.2;
+        border: 1px solid #213f7d;
+        border-radius: 8px;
+        padding: 4px 10px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+
+        color: #545f7d;
+
+        ::placeholder {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 16px;
+          color: rgba(84, 95, 125, 1);
+        }
+      }
+      select {
+        width: 250px;
+        height: 48px;
+      }
+    }
+    .filter-buttonContainer {
+      display: flex;
+      gap: 14px;
+      .filter-resetBtn {
+        width: 98px;
+        height: 40px;
+        left: 378px;
+        top: 1020px;
+
+        border: 1px solid #545f7d;
+        border-radius: 8px;
+      }
+      .filter-filterBtn {
+        width: 98px;
+        height: 40px;
+        left: 490px;
+        top: 1020px;
+        color: #ffffff;
+        background: #39cdcc;
+        border: 1px solid #39cdcc;
+        border-radius: 8px;
+      }
+    }
+  }
+}

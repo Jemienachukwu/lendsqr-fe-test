@@ -1,114 +1,168 @@
-.Login-main {
-  .Login-logo {
+@import "../../components/variables/variables.scss";
+@import url("https://fonts.cdnfonts.com/css/avenir-next-lt-pro");
+.login {
+  .login-logo {
     position: absolute;
     display: flex;
     gap: 10px;
+    align-items: center;
     width: 173.76px;
     height: 36px;
     left: 97px;
     top: 60px;
-    .Login-unionLogo {
+    @media (max-width: 1000px) {
+      left: 37px;
+      top: 40px;
+    }
+    .login-unionLogo {
       width: 24.75px;
       height: 25px;
+      @media (max-width: 1000px) {
+        width: 14px;
+        height: 20px;
+      }
     }
-    .Login-lendLogo {
+    .login-lendLogo {
       width: 138.44px;
       height: 36px;
+      @media (max-width: 1000px) {
+        width: 90px;
+        height: 30px;
+      }
     }
   }
-  .Login-Container {
+  .login-Container {
     display: flex;
-
+    align-items: center;
     justify-content: center;
     @media (max-width: 1000px) {
-      flex-direction: column;
+      margin-top: 200px;
+      padding: 0px 20px;
     }
-    align-items: center;
-    height: 100vh;
-    .Login-imgContainer {
+
+    .login-imgContainer {
+      width: 48%;
+      height: 337.57px;
       display: flex;
       justify-content: center;
-      align-items: center;
-      width: 48%;
-      .Login-pabloImgContainer {
-        margin-top: 40px;
-        top: 0px;
-        .Login-pabloImg {
-          width: 600px;
-          height: 337.57px;
-        }
+      margin-top: 100px;
+      @media (max-width: 1000px) {
+        display: none;
+      }
+    }
+    .login-pabloImg {
+      width: 600px;
+      @media (max-width: 600px) {
+        height: 200px;
+        width: 100%;
+      }
+    }
+  }
+
+  .login-formContainer {
+    width: 48%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    @media (max-width: 1000px) {
+      width: 90%;
+      height: max-content;
+      padding-bottom: 100px;
+    }
+    .text {
+      width: 427px;
+      text-align: left;
+      @media (max-width: 600px) {
+        width: 100%;
+      }
+      .login-welcomeText {
+        margin: 0px;
+        font-family: "Avenir Next LT Pro";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 55px;
+        letter-spacing: -0.04em;
+        color: $dark-color;
+      }
+      .login-detailsText {
+        font-family: "Avenir Next LT Pro";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 27px;
+        color: #545f7d;
+        margin-bottom: 60px;
       }
     }
 
-    .Login-formContainer {
-      width: 48%;
-      height: fit-content;
+    .login-inputeContainer {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      form {
-        .Login-welcomeText {
-          margin: 0px;
-          font-family: "Avenir Next";
-          font-style: normal;
-          font-weight: 700;
-          font-size: 40px;
-          line-height: 55px;
-          letter-spacing: -0.04em;
-          color: #213f7d;
-        }
-        .Login-detailsText {
-          font-family: "Avenir Next";
-          font-style: normal;
-          font-weight: 400;
-          font-size: 20px;
-          line-height: 27px;
-          color: #545f7d;
-          margin-bottom: 60px;
-        }
-
-        .Login-inputeContainer {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-
-          input {
-            width: 427px;
-            height: 42px;
-            background: #ffffff;
-            border: 2px solid rgba(84, 95, 125, 0.15);
-            border-radius: 5px;
-            padding: 4px 10px;
-            ::placeholder {
-              font-family: "Avenir Next";
-              font-style: normal;
-              font-weight: 400;
-              font-size: 14px;
-              line-height: 19px;
-              color: #545f7d;
-              opacity: 0.6;
-              margin: 0px 100px;
-            }
-          }
-        }
-        .forgotPassword {
-          font-family: "Avenir Next";
-          font-style: normal;
+      flex-direction: column;
+      gap: 24px;
+      @media (max-width: 600px) {
+        width: 100%;
+      }
+      .password-container {
+        position: relative;
+        p {
+          position: absolute;
+          cursor: pointer;
+          right: 15px;
+          bottom: 7px;
           font-weight: 600;
           font-size: 12px;
           line-height: 16px;
+          text-align: center;
           letter-spacing: 0.1em;
-          color: #39cdcc;
+          text-transform: uppercase;
+          color: $light-color;
         }
-        button {
-          width: 447px;
-          height: 50px;
-          border: 2px solid rgba(84, 95, 125, 0.15);
-          border-radius: 5px;
-          background: #39cdcc;
-          border-radius: 8px;
-          cursor: pointer;
+      }
+      input {
+        width: 417px;
+        height: 42px;
+        background: #ffffff;
+        border: 2px solid rgba(84, 95, 125, 0.15);
+        border-radius: 5px;
+        padding: 4px 10px;
+        @media (max-width: 600px) {
+          width: calc(100% - 22px);
         }
+        ::placeholder {
+          font-family: "Avenir Next LT Pro";
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 19px;
+          color: #545f7d;
+          opacity: 0.6;
+          margin: 0px 100px;
+        }
+      }
+    }
+    .forgotPassword {
+      font-family: "Avenir Next LT Pro";
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 0.1em;
+      color: $light-color;
+      margin: 24px 0px 30px 0px;
+      width: 427px;
+      text-align: left;
+    }
+    button {
+      width: 447px;
+      height: 48px;
+      border: 2px solid rgba(84, 95, 125, 0.15);
+      border-radius: 5px;
+      background: $light-color;
+      border-radius: 8px;
+      cursor: pointer;
+      @media (max-width: 600px) {
+        width: 100%;
       }
     }
   }
