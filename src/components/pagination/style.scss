@@ -1,7 +1,9 @@
 .pagination-main {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+
   .pagination-displayCount {
     display: flex;
     align-items: center;

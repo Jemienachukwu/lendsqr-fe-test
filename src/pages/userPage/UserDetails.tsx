@@ -71,14 +71,14 @@ const UserDetails = () => {
             </div>
           </div>
         </div>
-        <ul className="user-nav">
+        <div className="user-nav">
           <li>General Details</li>
           <li>Documents</li>
           <li>Bank Details</li>
           <li>Loan</li>
           <li>Savings</li>
           <li>App and System</li>
-        </ul>
+        </div>
         <div className="user-Info">
           <p>Personal Information</p>
           <div className="userInfo">

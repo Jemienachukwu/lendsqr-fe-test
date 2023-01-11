@@ -4,6 +4,7 @@ $light-red: #e4033b;
 
 .userDetails {
   height: 100vh;
+  width: 100vw;
   overflow: scroll;
 
   .user-goback {
@@ -74,6 +75,10 @@ $light-red: #e4033b;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    @media (max-width: 600px) {
+      display: block;
+      padding: 20px;
+    }
     .details-topContainer {
       display: flex;
       align-items: center;
@@ -81,6 +86,7 @@ $light-red: #e4033b;
       width: 70%;
       @media (max-width: 600px) {
         display: block;
+        width: 100%;
       }
       .user-profile {
         display: flex;
@@ -153,8 +159,10 @@ $light-red: #e4033b;
     position: relative;
     top: 17.8px;
     @media (max-width: 600px) {
+      padding: 0px 10px;
       width: 100vw;
       overflow: scroll;
+      gap: 0px 30px;
       top: 0px;
     }
     li {
