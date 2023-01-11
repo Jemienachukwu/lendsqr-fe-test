@@ -152,31 +152,39 @@
       margin: 24px 0px 30px 0px;
       width: 427px;
       text-align: left;
-    }
-    .activeBtn {
-      width: 447px;
-      height: 48px;
-      border: 2px solid rgba(84, 95, 125, 0.15);
-      border-radius: 5px;
-      background: $light-color;
-      border-radius: 8px;
-      color: #fff;
-      cursor: pointer;
       @media (max-width: 600px) {
         width: 100%;
       }
     }
+    .btn-container {
+      width: 100%;
+      .activeBtn {
+        width: 447px;
+        height: 48px;
+        border: 2px solid rgba(84, 95, 125, 0.15);
+        border-radius: 5px;
+        background: $light-color;
+        border-radius: 8px;
+        color: #fff;
+        cursor: pointer;
+        @media (max-width: 600px) {
+          width: 100%;
+        }
+      }
+
+      .disabledBtn {
+        color: #fff;
+        width: 447px;
+        height: 48px;
+        border: 2px solid rgba(84, 95, 125, 0.15);
+        border-radius: 5px;
+        background: rgba(57, 205, 204, 0.6);
+        border-radius: 8px;
+        cursor: not-allowed;
+        @media (max-width: 600px) {
+          width: 100%;
+        }
+      }
+    }
   }
-}
-.disabledBtn {
-  color: #fff;
-
-  width: 447px;
-  height: 48px;
-  border: 2px solid rgba(84, 95, 125, 0.15);
-  border-radius: 5px;
-  background: rgba(57, 205, 204, 0.6);
-
-  border-radius: 8px;
-  cursor: not-allowed;
 }

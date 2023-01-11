@@ -49,7 +49,7 @@ const Login = () => {
             </div>
           </div>
           <p className="forgotPassword">FORGOT PASSWORD ?</p>
-          <Link to="/dashboard/users">
+          <Link to="/dashboard/users" className="btn-container">
             <button
               disabled={!email && !password}
               className={!email && !password ? "disabledBtn" : "activeBtn"}
