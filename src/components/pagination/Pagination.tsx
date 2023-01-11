@@ -47,7 +47,6 @@ export default function Pagination({
           <PageLink
             key={idx}
             active={currentPage === pageNum}
-            // disabled={isNaN(pageNum)}
             onClick={() => paginate(pageNum)}
           >
             {pageNum}

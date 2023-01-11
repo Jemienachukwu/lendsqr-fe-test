@@ -8,7 +8,7 @@ const UserOptions = ({ id }: any) => {
   return (
     <>
       <div className="options">
-        <Link to={`/user/${id}`} className="option-item">
+        <Link to={`/dashboard/user/${id}`} className="option-item">
           <img src={viewUser} alt="view user" /> View Details
         </Link>
         <span className="option-item">

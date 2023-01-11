@@ -4,8 +4,11 @@ import lendsqr from "../../images/lendsqr.png";
 import union from "../../images/Union.png";
 
 import "./style.scss";
+import { Link } from "react-router-dom";
 const Login = () => {
   const [showPassword, setShowPassword] = useState("password");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <div className="login">
       <div className="login-logo">
@@ -23,9 +26,19 @@ const Login = () => {
             <p className="login-detailsText">Enter details to login.</p>
           </div>
           <div className="login-inputeContainer">
-            <input type="email" placeholder="Email" />
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <div className="password-container">
-              <input type={showPassword} placeholder="Password" />
+              <input
+                type={showPassword}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
               <>
                 {showPassword === "password" ? (
                   <p onClick={() => setShowPassword("text")}>SHOW</p>
@@ -36,7 +49,14 @@ const Login = () => {
             </div>
           </div>
           <p className="forgotPassword">FORGOT PASSWORD ?</p>
-          <button>LOG IN</button>
+          <Link to="/dashboard/users">
+            <button
+              disabled={!email && !password}
+              className={!email && !password ? "disabledBtn" : "activeBtn"}
+            >
+              LOG IN
+            </button>
+          </Link>
         </form>
       </div>
     </div>
