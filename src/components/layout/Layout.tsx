@@ -8,12 +8,13 @@ const Layout = ({ children }: any) => {
   const [showSide, setShowSide] = useState(false);
 
   return (
-    <div style={{ height: "100vh", zIndex: "3" }}>
+    <div className="layout-container">
       <NavBar />
-      <div style={{ display: "flex" }}>
+      <div className="body">
         <div className={showSide ? "sidebarContainer" : "sidebarContainer1"}>
           <Sidebar />
         </div>
+
         <div className="parentContainer">{children}</div>
       </div>
     </div>

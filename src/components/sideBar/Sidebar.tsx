@@ -53,54 +53,54 @@ const Sidebar = ({ children }: any) => {
     { text: "Audit Logs", img: clipboard },
   ];
   return (
-    <div className="sideBar">
+    <div className="sidebar">
       <div className="mobile-utilities">
         <div className="avatar">
           <img src={avatar} alt="user" />
         </div>
-        <div className="userName">
+        <div className="username">
           <p>Adedeji</p>
-          <img src={dropDown} alt="drop" className="dropDown" />
+          <img src={dropDown} alt="drop" className="dropdown" />
         </div>
         <div className="searchbar">
           <input type="search" placeholder="Search for anything" />
         </div>
       </div>
-      <div className="sideBar-topContainer">
-        <div className="sidebar-Tab">
+      <div className="sidebar-top-container">
+        <div className="sidebar-tab">
           <img src={briefcase} alt="Organisation" />
           Switch Organisation
           <img src={vector} alt="vectorImg" />
         </div>
-        <div className="sidebar-Tab">
+        <div className="sidebar-tab">
           <img src={dashboard} alt="dashboard" />
           Dashboard
         </div>
       </div>
 
-      <p className="sidebar-tabHeaders">CUSTOMERS</p>
+      <p className="sidebar-tab-header">CUSTOMERS</p>
       {customers.map((item, i) => (
         <div
           key={i}
           className={
-            item.text === "Users" ? "sidebar-currentTab" : "sidebar-Tab"
+            item.text === "Users" ? "sidebar-current-tab" : "sidebar-tab"
           }
         >
           <img src={item.img} alt={item.text} />
           {item.text}
         </div>
       ))}
-      <p className="sidebar-tabHeaders">BUSINESSES</p>
+      <p className="sidebar-tab-header">BUSINESSES</p>
       {businesses.map((item, i) => (
-        <div key={i} className="sidebar-Tab">
+        <div key={i} className="sidebar-tab">
           <img src={item.img} alt={item.text} />
           {item.text}
         </div>
       ))}
 
-      <p className="sidebar-tabHeaders">SETTINGS</p>
+      <p className="sidebar-tab-header">SETTINGS</p>
       {settings.map((item, i) => (
-        <div key={i} className="sidebar-Tab">
+        <div key={i} className="sidebar-tab">
           <img src={item.img} alt={item.text} />
           {item.text}
         </div>

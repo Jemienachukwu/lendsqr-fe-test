@@ -1,39 +1,47 @@
 // @import "./components//variables/variables.scss";
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
 $font-family: "work sans";
-.app {
-  font-family: $font-family;
-  font-style: normal;
-  @media (max-width: 1500px) {
-    max-width: 1500px;
-  }
 
-  .sidebarContainer {
-    height: max-content;
-    width: 283px;
-    transition: width 0.15s ease-in-out;
-    @media (max-width: 900px) {
-      background: #ffffff;
-      box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
-    }
-  }
-  .sidebarContainer1 {
-    @media (max-width: 900px) {
-      width: 0px;
-      transition: width 0.15s ease-in-out;
-    }
-  }
-  .parentContainer {
-    padding: 60px;
-    width: 70vw;
-    height: max-content;
-    overflow: hidden;
-    @media (max-width: 900px) {
-      width: 100vw;
-      padding: 20px;
-    }
+.body {
+  max-width: 1440px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  // background-color: green;
+  overflow: hidden;
+}
+.sidebarContainer {
+  width: 20%;
+  height: 100vh;
+  overflow-y: auto;
+  max-width: 283px;
+  transition: width 0.15s ease-in-out;
+  @media (max-width: 900px) {
+    background: #ffffff;
+    box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
   }
 }
+.sidebarContainer1 {
+  @media (max-width: 900px) {
+    width: 0px;
+    transition: width 0.15s ease-in-out;
+  }
+}
+.parentContainer {
+  height: 100vh;
+  overflow-y: auto;
+  margin-top: 100px;
+  padding: 60px;
+  max-width: 1157px;
+  width: 80%;
+  height: max-content;
+  overflow: hidden;
+  @media (max-width: 900px) {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent;
