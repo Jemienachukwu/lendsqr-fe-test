@@ -1,4 +1,3 @@
-import React from "react";
 import "./style.scss";
 import { Link } from "react-router-dom";
 const NavBar = ({ showSide, setShowSide }: any) => {
@@ -12,6 +11,7 @@ const NavBar = ({ showSide, setShowSide }: any) => {
           <img src="/icons/logo.svg" alt="img" />
         </div>
       </div>
+
       <div className="navbar-utilities">
         <div className="navbar-search">
           <input type="search" placeholder="Search for anything" />

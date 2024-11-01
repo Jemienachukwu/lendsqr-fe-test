@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "../navbar/Navbar";
 import Sidebar from "../sideBar/Sidebar";
-// import Sidebar from "../sidebar/Sidebar";
+
 import "./style.scss";
 
 const Layout = ({ children }: any) => {
@@ -9,7 +9,7 @@ const Layout = ({ children }: any) => {
 
   return (
     <div className="layout-container">
-      <NavBar />
+      <NavBar setShowSide={setShowSide} showSide={showSide} />
       <div className="body">
         <div className={showSide ? "sidebarContainer" : "sidebarContainer1"}>
           <Sidebar />

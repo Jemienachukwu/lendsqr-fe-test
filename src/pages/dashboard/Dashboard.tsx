@@ -4,8 +4,7 @@ import totalusers from "./imgs/usericon.png";
 import activeusers from "./imgs/iconactiveuser.png";
 import userLoan from "./imgs/iconuserloan.png";
 import usersaving from "./imgs/iconsavings.png";
-import filterIcon from "./imgs/filter-results-button.png";
-import dots from "./imgs/dots.png";
+
 import axios from "axios";
 import UserOptions from "./UserOptions";
 import Filter from "../../components/filter/Filter";
@@ -20,6 +19,7 @@ interface User {
   email: string;
   phoneNumber: string;
   createdAt: string;
+  lastActiveDate: string;
 }
 
 interface UserInfo {
@@ -66,6 +66,22 @@ const Dashboard: React.FC = () => {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  // Determine user status based on lastActiveDate
+  const getUserStatus = (lastActiveDate: string) => {
+    const lastActive = moment(lastActiveDate);
+    const now = moment();
+    const daysDifference = now.diff(lastActive, "days");
+
+    if (daysDifference <= 7) {
+      return { status: "Active", style: "active" };
+    } else if (daysDifference <= 30) {
+      return { status: "Pending", style: "pending" };
+    } else if (daysDifference <= 90) {
+      return { status: "Inactive", style: "inactive" };
+    } else {
+      return { status: "Blacklist", style: "blacklist" };
+    }
+  };
   return (
     <Layout>
       <div className="dashboard">
@@ -131,47 +147,47 @@ const Dashboard: React.FC = () => {
             )}
 
             <tbody>
-              {currentPost.map((user) => (
-                <tr key={user.id}>
-                  <td>{user.orgName}</td>
-                  <td>{user.userName}</td>
-                  <td>{user.email}</td>
-                  <td>{user.phoneNumber}</td>
-                  <td>{moment(user.createdAt).format("lll")}</td>
-                  <td>
-                    <div className="dashboard-status">inactive</div>
-                  </td>
-                  <td className="status">
-                    {clickedIndex[user.id] && (
-                      <div className="option">
-                        <UserOptions id={user.id} />
+              {currentPost.map((user) => {
+                const { status, style } = getUserStatus(user.lastActiveDate);
+                return (
+                  <tr key={user.id}>
+                    <td>{user.orgName}</td>
+                    <td>{user.userName}</td>
+                    <td>{user.email}</td>
+                    <td>{user.phoneNumber}</td>
+                    <td>{moment(user.createdAt).format("lll")}</td>
+                    <td>
+                      <div className={`dashboard-status ${style}`}>
+                        {status}
                       </div>
-                    )}
-
-                    <span onClick={handleClick(user.id)} className="option-btn">
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+                    </td>
+                    <td className="status">
+                      {clickedIndex[user.id] && (
+                        <div className="option">
+                          <UserOptions id={user.id} />
+                        </div>
+                      )}
+                      <span
+                        onClick={handleClick(user.id)}
+                        className="option-btn"
                       >
-                        <g clipPath="url(#clip0_5530_2613)">
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
                           <path
                             d="M9.99992 6.1111C10.9221 6.1111 11.6666 5.36666 11.6666 4.44444C11.6666 3.52222 10.9221 2.77777 9.99992 2.77777C9.0777 2.77777 8.33325 3.52222 8.33325 4.44444C8.33325 5.36666 9.0777 6.1111 9.99992 6.1111ZM9.99992 8.33333C9.0777 8.33333 8.33325 9.07777 8.33325 9.99999C8.33325 10.9222 9.0777 11.6667 9.99992 11.6667C10.9221 11.6667 11.6666 10.9222 11.6666 9.99999C11.6666 9.07777 10.9221 8.33333 9.99992 8.33333ZM9.99992 13.8889C9.0777 13.8889 8.33325 14.6333 8.33325 15.5555C8.33325 16.4778 9.0777 17.2222 9.99992 17.2222C10.9221 17.2222 11.6666 16.4778 11.6666 15.5555C11.6666 14.6333 10.9221 13.8889 9.99992 13.8889Z"
                             fill="#545F7D"
                           />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_5530_2613">
-                            <rect width="20" height="20" fill="white" />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                    </span>
-                  </td>
-                </tr>
-              ))}
+                        </svg>
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

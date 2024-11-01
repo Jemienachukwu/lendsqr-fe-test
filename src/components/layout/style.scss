@@ -3,20 +3,23 @@
 $font-family: "work sans";
 
 .body {
-  max-width: 1440px;
+  // height: calc(100vh + 100px);
+  // max-width: 1440px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  // background-color: green;
+  padding: 0;
   overflow: hidden;
 }
 .sidebarContainer {
+  // height: 120vh;
+  // height: calc(100vh + 100px);
   width: 20%;
-  height: 100vh;
-  overflow-y: auto;
   max-width: 283px;
+  overflow-y: auto;
   transition: width 0.15s ease-in-out;
   @media (max-width: 900px) {
+    max-width: none;
+    width: 400px;
     background: #ffffff;
     box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
   }
@@ -24,17 +27,18 @@ $font-family: "work sans";
 .sidebarContainer1 {
   @media (max-width: 900px) {
     width: 0px;
+    // width: 800px;
     transition: width 0.15s ease-in-out;
   }
 }
 .parentContainer {
-  height: 100vh;
+  // height: 100vh;
+  // height: calc(100vh + 300px);
+  width: 80%;
+  max-width: 1157px;
   overflow-y: auto;
   margin-top: 100px;
   padding: 60px;
-  max-width: 1157px;
-  width: 80%;
-  height: max-content;
   overflow: hidden;
   @media (max-width: 900px) {
     width: 100%;

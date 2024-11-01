@@ -1,6 +1,9 @@
 .dashboard {
   width: 100%;
+  height: calc(100vh + 300px);
+
   height: 100vh;
+  // margin-bottom: 100px;
   overflow-y: auto;
   color: #545f7d;
 
@@ -92,6 +95,29 @@
       border-bottom: solid 1px rgba(33, 63, 125, 0.1);
       .option-btn {
         cursor: pointer;
+      }
+      .dashboard-status {
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        &.active {
+          background: rgba(57, 205, 98, 0.1);
+          color: #39cd62;
+        }
+        &.pending {
+          background-color: rgba(233, 178, 0, 0.1);
+          color: #e9b200;
+        }
+        &.inactive {
+          background-color: rgba(84, 95, 125, 0.1);
+          color: #545f7d;
+        }
+        &.blacklist {
+          background: rgba(228, 3, 59, 0.1);
+          color: #e4033b;
+        }
       }
     }
     .filter-component {
