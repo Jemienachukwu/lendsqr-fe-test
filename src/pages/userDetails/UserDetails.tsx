@@ -149,16 +149,18 @@ const UserDetails: React.FC = () => {
             </div>
           </div>
           <div className="user-nav">
-            {[
-              "General Details",
-              "Documents",
-              "Bank Details",
-              "Loan",
-              "Savings",
-              "App and System",
-            ].map((item) => (
-              <li key={item}>{item}</li>
-            ))}
+            <ul>
+              {[
+                "General Details",
+                "Documents",
+                "Bank Details",
+                "Loan",
+                "Savings",
+                "App and System",
+              ].map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </div>
         </div>
 

@@ -1,40 +1,41 @@
 // @import "./components//variables/variables.scss";
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
 $font-family: "work sans";
-
+.layout-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 .body {
   max-width: 1440px;
   width: 100%;
   display: flex;
-  padding: 0;
   overflow: hidden;
 }
 .sidebarContainer {
-  width: 20%;
-  max-width: 283px;
-  overflow-y: auto;
+  background: #ffffff;
+  width: 283px;
   transition: width 0.15s ease-in-out;
   @media (max-width: 900px) {
-    max-width: none;
-    width: 400px;
-    background: #ffffff;
+    position: absolute;
+    z-index: 2;
     box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
   }
 }
 .sidebarContainer1 {
+  width: 283px;
   @media (max-width: 900px) {
     width: 0px;
-    // width: 800px;
     transition: width 0.15s ease-in-out;
   }
 }
 .parentContainer {
+  flex: 1; /* Takes up remaining width */
+  height: calc(100vh - 100px); /* Adjusted height for the navbar */
+  overflow-y: auto; /* Makes the main content scrollable */
   max-width: 1157px;
-  width: 80%;
-  overflow-y: auto;
   margin-top: 100px;
   padding: 60px;
-  overflow: hidden;
   @media (max-width: 900px) {
     width: 100%;
     padding: 20px;

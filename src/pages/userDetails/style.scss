@@ -69,17 +69,18 @@
     box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
     border-radius: 4px;
     @media (max-width: 600px) {
-      padding: 20px;
+      padding: 0 20px;
+
+      height: fit-content;
     }
     .personal-user-info {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      // width: 70%;
       width: fit-content;
-      @media (max-width: 900px) {
-        // display: block;
-        // width: 100%;
+      @media (max-width: 600px) {
+        justify-content: unset;
       }
       h1 {
         font-weight: 500;
@@ -115,6 +116,9 @@
         @media (max-width: 600px) {
           border: none;
           padding: 0px;
+          width: 40%;
+          padding: 10px 20px;
+          align-items: start;
         }
         p {
           font-weight: 500;
@@ -125,7 +129,9 @@
       }
       .user-balance {
         padding-left: 20px;
-
+        @media (max-width: 600px) {
+          width: 30%;
+        }
         h2 {
           font-weight: 500;
           font-size: 22px;
@@ -145,19 +151,27 @@
   }
 
   .user-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    @media (max-width: 600px) {
-      padding: 0px 10px;
-      overflow: scroll;
-      gap: 0px 30px;
+    // background-color: yellow;
+    overflow: auto;
+
+    ul {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      @media (max-width: 600px) {
+        // padding: 0px 10px;
+        // background-color: red;
+        gap: 0px 10px;
+        width: max-content;
+        overflow-x: scroll;
+      }
     }
     li {
+      // background-color: green;
       padding: 10px;
       list-style-type: none;
       text-align: center;
-      // padding: 0px 12px;
       color: rgba(0, 0, 0, 0.8);
       cursor: pointer;
       &:hover {

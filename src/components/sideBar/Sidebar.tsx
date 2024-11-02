@@ -24,7 +24,7 @@ import vector from "./imgs/Vector.png";
 import avatar from "./imgs/avatar.png";
 import dropDown from "./imgs/dropDown.png";
 
-const Sidebar = ({ children }: any) => {
+const Sidebar = () => {
   const customers = [
     { text: "Users", img: users },
     { text: "Guarantors", img: guarantors },

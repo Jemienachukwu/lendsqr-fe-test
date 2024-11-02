@@ -6,6 +6,7 @@ interface FilterProps {
   setFilterData: React.Dispatch<React.SetStateAction<FilterData>>;
   onResetFilter: () => void;
   onApplyFilter: (filterData: FilterData) => void;
+  setFilter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface FilterData {
   organization: string;
@@ -21,6 +22,7 @@ const Filter: React.FC<FilterProps> = ({
   onApplyFilter,
   setFilterData,
   onResetFilter,
+  setFilter,
 }) => {
   const [formData, setFormData] = useState<FilterData>({
     organization: "",
@@ -41,6 +43,15 @@ const Filter: React.FC<FilterProps> = ({
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     onApplyFilter(formData);
+    setFilter((prev) => !prev);
+    setFormData({
+      organization: "",
+      username: "",
+      email: "",
+      date: "",
+      phoneNumber: "",
+      status: "",
+    });
   };
   console.log();
 
@@ -125,11 +136,7 @@ const Filter: React.FC<FilterProps> = ({
           >
             Reset
           </button>
-          <button
-            type="submit"
-            className="filter-filterBtn"
-            onClick={onResetFilter}
-          >
+          <button type="submit" className="filter-filterBtn">
             Filter
           </button>
         </div>

@@ -1,5 +1,3 @@
-@import "../variables/variables.scss";
-
 .navbar-main {
   position: fixed;
   z-index: 3;
@@ -12,6 +10,10 @@
   box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
   @media (max-width: 900px) {
     justify-content: space-between;
+  }
+  .navbar-dropDown,
+  .navbar-notificationIcon {
+    cursor: pointer;
   }
   .logo-container {
     margin-left: 30px;
@@ -81,7 +83,6 @@
       }
     }
     .utilities {
-      // padding-right: 60px;
       gap: 30px;
       display: flex;
       align-items: center;
@@ -99,13 +100,14 @@
           display: none;
         }
         .navbar-userIcon {
-          border-radius: 50%;
+          height: 48px;
+          width: 48px;
         }
         .navbar-userName {
           font-weight: 500;
           font-size: 16px;
           line-height: 19px;
-          color: $dark-color;
+          color: #213f7d;
         }
       }
     }

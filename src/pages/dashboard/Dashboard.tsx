@@ -67,6 +67,7 @@ const Dashboard: React.FC = () => {
   const handleResetFilter = () => {
     setFilterData(initialFilterData);
     setFilteredData(data);
+    setFilter((prev) => !prev);
   };
   const handleApplyFilter = (newFilterData: FilterData) => {
     setFilterData(newFilterData);
@@ -175,8 +176,8 @@ const Dashboard: React.FC = () => {
                         className="filter-btn"
                       >
                         <svg
-                          width="16"
-                          height="16"
+                          width="15"
+                          height="15"
                           viewBox="0 0 16 16"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
@@ -202,6 +203,7 @@ const Dashboard: React.FC = () => {
                       setFilterData={setFilterData} // Add setFilterData prop
                       onApplyFilter={handleApplyFilter}
                       onResetFilter={handleResetFilter}
+                      setFilter={setFilter}
                     />
                   </td>
                 </tr>
@@ -254,7 +256,7 @@ const Dashboard: React.FC = () => {
 
       <Pagination
         postsPerPage={postsPerPage}
-        totalPosts={data.length}
+        totalPosts={filteredData.length}
         paginate={paginate}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

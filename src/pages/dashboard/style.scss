@@ -1,11 +1,8 @@
 .dashboard {
   width: 100%;
-  // margin-bottom: 100px;
-  overflow-y: auto;
   color: #545f7d;
-
   .dashboard-top-container {
-    margin-top: 58px;
+    margin-top: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -52,6 +49,10 @@
   }
   .dashboard-table-container {
     margin-top: 40px;
+    overflow-x: scroll;
+    // min-height: 400px;
+    // height: max-content;
+
     background-color: #fff;
     border: 1px solid #213f7d0f;
     box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
@@ -68,10 +69,12 @@
     width: 100%;
     font-size: 12px;
     position: relative;
-
+    @media (max-width: 1257px) {
+      width: max-content;
+    }
     .tableHeader-row {
       th {
-        height: 60px;
+        // height: 60px;
         gap: 10px;
         text-align: start;
         padding: auto 0;
