@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  color: #213f7d;
 
   .pagination-displayCount {
     display: flex;
@@ -14,12 +15,16 @@
     font-size: 14px;
     line-height: 16px;
     color: #545f7d;
+    @media (max-width: 550px) {
+      margin-bottom: 20px;
+    }
     select {
       background: rgba(33, 63, 125, 0.1);
       border-radius: 4px;
       height: 30px;
       width: 80px;
       padding: 4px;
+      color: #213f7d;
     }
   }
   .navigationTag {

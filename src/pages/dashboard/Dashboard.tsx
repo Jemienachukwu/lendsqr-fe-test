@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
 
-import totalusers from "./imgs/usericon.png";
-import activeusers from "./imgs/iconactiveuser.png";
-import userLoan from "./imgs/iconuserloan.png";
-import usersaving from "./imgs/iconsavings.png";
+import totalusers from "./imgs/totaluser.svg";
+import activeusers from "./imgs/activeusers.svg";
+import userLoan from "./imgs/usersloan.svg";
+import usersaving from "./imgs/usersavings.svg";
 
 import Layout from "../../components/layout/Layout";
 import UserOptions from "./UserOptions";
@@ -39,12 +39,6 @@ interface UserInfo {
 }
 
 const Dashboard: React.FC = () => {
-  const usersInfo: UserInfo[] = [
-    { img: totalusers, title: "USERS", number: "2,453" },
-    { img: activeusers, title: "ACTIVE USERS", number: "2,453" },
-    { img: userLoan, title: "USERS WITH LOAN", number: "12,453" },
-    { img: usersaving, title: "USERS WITH SAVINGS", number: "102,453" },
-  ];
   const initialFilterData: FilterData = {
     organization: "",
     username: "",
@@ -136,7 +130,12 @@ const Dashboard: React.FC = () => {
       return { status: "Blacklist", style: "blacklist" };
     }
   };
-
+  const usersInfo: UserInfo[] = [
+    { img: totalusers, title: "USERS", number: "2,453" },
+    { img: activeusers, title: "ACTIVE USERS", number: "2,453" },
+    { img: userLoan, title: "USERS WITH LOAN", number: "12,453" },
+    { img: usersaving, title: "USERS WITH SAVINGS", number: "102,453" },
+  ];
   return (
     <Layout>
       <div className="dashboard">

@@ -12,8 +12,10 @@
   .mobile-utilities {
     margin-bottom: 60px;
     display: none;
+    gap: 10px;
     @media (max-width: 900px) {
-      display: block;
+      display: flex;
+      flex-direction: column;
     }
     .avatar {
       display: flex;
