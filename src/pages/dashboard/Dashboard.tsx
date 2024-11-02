@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../../components/layout/Layout";
+import axios from "axios";
+import moment from "moment";
+
 import totalusers from "./imgs/usericon.png";
 import activeusers from "./imgs/iconactiveuser.png";
 import userLoan from "./imgs/iconuserloan.png";
 import usersaving from "./imgs/iconsavings.png";
 
-import axios from "axios";
+import Layout from "../../components/layout/Layout";
 import UserOptions from "./UserOptions";
 import Filter from "../../components/filter/Filter";
-import moment from "moment";
 import Pagination from "../../components/pagination/Pagination";
 import "./style.scss";
 
@@ -20,6 +21,15 @@ interface User {
   phoneNumber: string;
   createdAt: string;
   lastActiveDate: string;
+}
+
+interface FilterData {
+  organization: string;
+  username: string;
+  email: string;
+  date: string;
+  phoneNumber: string;
+  status: string;
 }
 
 interface UserInfo {
@@ -35,6 +45,14 @@ const Dashboard: React.FC = () => {
     { img: userLoan, title: "USERS WITH LOAN", number: "12,453" },
     { img: usersaving, title: "USERS WITH SAVINGS", number: "102,453" },
   ];
+  const initialFilterData: FilterData = {
+    organization: "",
+    username: "",
+    email: "",
+    date: "",
+    phoneNumber: "",
+    status: "",
+  };
 
   const [filter, setFilter] = useState<boolean>(false);
   const [data, setData] = useState<User[]>([]);
@@ -43,7 +61,16 @@ const Dashboard: React.FC = () => {
   );
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [postsPerPage, setPostsPerPage] = useState<number>(10);
+  const [filteredData, setFilteredData] = useState<User[]>([]);
+  const [filterData, setFilterData] = useState<FilterData>(initialFilterData);
 
+  const handleResetFilter = () => {
+    setFilterData(initialFilterData);
+    setFilteredData(data);
+  };
+  const handleApplyFilter = (newFilterData: FilterData) => {
+    setFilterData(newFilterData);
+  };
   const handleClick = (id: string) => () => {
     setClickedIndex((state) => ({
       ...state,
@@ -56,17 +83,43 @@ const Dashboard: React.FC = () => {
       .get<User[]>(
         "https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users"
       )
-      .then((res) => setData(res.data))
+      .then((res) => {
+        setData(res.data);
+        setFilteredData(res.data);
+      })
       .catch((err) => console.error("Error fetching data:", err));
   }, []);
 
+  useEffect(() => {
+    const filtered = data.filter((user) => {
+      return (
+        (filterData.organization
+          ? user.orgName.includes(filterData.organization)
+          : true) &&
+        (filterData.username
+          ? user.userName.includes(filterData.username)
+          : true) &&
+        (filterData.email ? user.email.includes(filterData.email) : true) &&
+        (filterData.phoneNumber
+          ? user.phoneNumber.includes(filterData.phoneNumber)
+          : true) &&
+        (filterData.date
+          ? moment(user.createdAt).isSame(filterData.date, "day")
+          : true) &&
+        (filterData.status
+          ? getUserStatus(user.lastActiveDate).status === filterData.status
+          : true)
+      );
+    });
+    setFilteredData(filtered);
+  }, [data, filterData]);
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPost = data.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = filteredData.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  // Determine user status based on lastActiveDate
   const getUserStatus = (lastActiveDate: string) => {
     const lastActive = moment(lastActiveDate);
     const now = moment();
@@ -82,6 +135,7 @@ const Dashboard: React.FC = () => {
       return { status: "Blacklist", style: "blacklist" };
     }
   };
+
   return (
     <Layout>
       <div className="dashboard">
@@ -116,7 +170,6 @@ const Dashboard: React.FC = () => {
                   <th key={header}>
                     <span className="th-container">
                       {header}
-
                       <span
                         onClick={() => setFilter(!filter)}
                         className="filter-btn"
@@ -140,14 +193,20 @@ const Dashboard: React.FC = () => {
               </tr>
             </thead>
 
-            {filter && (
-              <div className="filter-component">
-                <Filter />
-              </div>
-            )}
-
             <tbody>
-              {currentPost.map((user) => {
+              {filter && (
+                <tr className="filter-component">
+                  <td>
+                    <Filter
+                      filterData={filterData}
+                      setFilterData={setFilterData} // Add setFilterData prop
+                      onApplyFilter={handleApplyFilter}
+                      onResetFilter={handleResetFilter}
+                    />
+                  </td>
+                </tr>
+              )}
+              {currentPosts.map((user) => {
                 const { status, style } = getUserStatus(user.lastActiveDate);
                 return (
                   <tr key={user.id}>
@@ -191,15 +250,16 @@ const Dashboard: React.FC = () => {
             </tbody>
           </table>
         </div>
-        <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={data.length}
-          paginate={paginate}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          setPostPerPage={setPostsPerPage}
-        />
       </div>
+
+      <Pagination
+        postsPerPage={postsPerPage}
+        totalPosts={data.length}
+        paginate={paginate}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        setPostPerPage={setPostsPerPage}
+      />
     </Layout>
   );
 };

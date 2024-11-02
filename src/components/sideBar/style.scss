@@ -49,10 +49,10 @@
     }
   }
   .sidebar-tab-header {
-    margin-left: 26px;
     font-weight: 500;
     font-size: 12px;
     line-height: 14px;
+    margin: 30px 0px 10px 20px;
   }
   .sidebar-top-container {
     display: flex;
@@ -73,7 +73,9 @@
       background: rgba(57, 205, 204, 0.06);
     }
   }
-
+  .sidebar-section {
+    margin: 20px 0;
+  }
   .sidebar-current-tab {
     padding: 0px 20px;
     height: 40px;

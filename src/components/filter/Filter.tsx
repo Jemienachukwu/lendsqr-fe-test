@@ -1,29 +1,95 @@
-import React from "react";
-
+import React, { useState } from "react";
 import "./style.scss";
-const Filter = () => {
+
+interface FilterProps {
+  filterData: FilterData;
+  setFilterData: React.Dispatch<React.SetStateAction<FilterData>>;
+  onResetFilter: () => void;
+  onApplyFilter: (filterData: FilterData) => void;
+}
+interface FilterData {
+  organization: string;
+  username: string;
+  email: string;
+  date: string;
+  phoneNumber: string;
+  status: string;
+}
+
+const Filter: React.FC<FilterProps> = ({
+  filterData,
+  onApplyFilter,
+  setFilterData,
+  onResetFilter,
+}) => {
+  const [formData, setFormData] = useState<FilterData>({
+    organization: "",
+    username: "",
+    email: "",
+    date: "",
+    phoneNumber: "",
+    status: "",
+  });
+
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    onApplyFilter(formData);
+  };
+  console.log();
+
   return (
     <div className="filter">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="filter-inputes">
           <label>Organization</label>
-          <select id="organization" name="organization">
-            <option value="organization">Select</option>
-            <option value="organization">organization</option>
-            <option value="organization">organization</option>
-          </select>
+          <input
+            id="organization"
+            type="text"
+            name="organization"
+            placeholder="User"
+            value={formData.organization}
+            onChange={handleChange}
+          />
         </div>
         <div className="filter-inputes">
           <label>Username</label>
-          <input id="username" type="text" name="username" placeholder="User" />
+          <input
+            id="username"
+            type="text"
+            name="username"
+            placeholder="User"
+            value={formData.username}
+            onChange={handleChange}
+          />
         </div>
         <div className="filter-inputes">
           <label>Email</label>
-          <input id="Email" type="email" name="Email" placeholder="Email" />
+          <input
+            id="email"
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+          />
         </div>
         <div className="filter-inputes">
           <label>Date</label>
-          <input id="date" type="date" name="date" placeholder="Date" />
+          <input
+            id="date"
+            type="date"
+            name="date"
+            placeholder="Date"
+            value={formData.date}
+            onChange={handleChange}
+          />
         </div>
         <div className="filter-inputes">
           <label>Phone Number</label>
@@ -32,20 +98,40 @@ const Filter = () => {
             type="tel"
             name="phoneNumber"
             placeholder="Phone Number"
+            value={formData.phoneNumber}
+            onChange={handleChange}
           />
         </div>
         <div className="filter-inputes">
           <label>Status</label>
-          <select id="Status" name="Status">
-            <option value="Status">Select</option>
-            <option value="Status">ACTIVE</option>
-            <option value="Status">INACTIVE</option>
-            <option value="Status">BLACKLIST</option>
+          <select
+            id="status"
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+          >
+            <option value="">Select</option>
+            <option value="active">active</option>
+            <option value="inactive">inactive</option>
+            <option value="pending">pending</option>
+            <option value="blacklist">blacklist</option>
           </select>
         </div>
         <div className="filter-buttonContainer">
-          <button className="filter-resetBtn">Reset</button>
-          <button className="filter-filterBtn">Filter</button>
+          <button
+            type="button"
+            className="filter-resetBtn"
+            onClick={onResetFilter}
+          >
+            Reset
+          </button>
+          <button
+            type="submit"
+            className="filter-filterBtn"
+            onClick={onResetFilter}
+          >
+            Filter
+          </button>
         </div>
       </form>
     </div>

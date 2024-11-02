@@ -3,16 +3,13 @@
 $font-family: "work sans";
 
 .body {
-  // height: calc(100vh + 100px);
-  // max-width: 1440px;
+  max-width: 1440px;
   width: 100%;
   display: flex;
   padding: 0;
   overflow: hidden;
 }
 .sidebarContainer {
-  // height: 120vh;
-  // height: calc(100vh + 100px);
   width: 20%;
   max-width: 283px;
   overflow-y: auto;
@@ -32,10 +29,8 @@ $font-family: "work sans";
   }
 }
 .parentContainer {
-  // height: 100vh;
-  // height: calc(100vh + 300px);
-  width: 80%;
   max-width: 1157px;
+  width: 80%;
   overflow-y: auto;
   margin-top: 100px;
   padding: 60px;

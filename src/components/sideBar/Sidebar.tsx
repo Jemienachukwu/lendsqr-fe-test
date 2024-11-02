@@ -77,34 +77,38 @@ const Sidebar = ({ children }: any) => {
           Dashboard
         </div>
       </div>
-
-      <p className="sidebar-tab-header">CUSTOMERS</p>
-      {customers.map((item, i) => (
-        <div
-          key={i}
-          className={
-            item.text === "Users" ? "sidebar-current-tab" : "sidebar-tab"
-          }
-        >
-          <img src={item.img} alt={item.text} />
-          {item.text}
-        </div>
-      ))}
-      <p className="sidebar-tab-header">BUSINESSES</p>
-      {businesses.map((item, i) => (
-        <div key={i} className="sidebar-tab">
-          <img src={item.img} alt={item.text} />
-          {item.text}
-        </div>
-      ))}
-
-      <p className="sidebar-tab-header">SETTINGS</p>
-      {settings.map((item, i) => (
-        <div key={i} className="sidebar-tab">
-          <img src={item.img} alt={item.text} />
-          {item.text}
-        </div>
-      ))}
+      <div className="sidebar-section">
+        <p className="sidebar-tab-header">CUSTOMERS</p>
+        {customers.map((item, i) => (
+          <div
+            key={i}
+            className={
+              item.text === "Users" ? "sidebar-current-tab" : "sidebar-tab"
+            }
+          >
+            <img src={item.img} alt={item.text} />
+            {item.text}
+          </div>
+        ))}
+      </div>
+      <div className="sidebar-section">
+        <p className="sidebar-tab-header">BUSINESSES</p>
+        {businesses.map((item, i) => (
+          <div key={i} className="sidebar-tab">
+            <img src={item.img} alt={item.text} />
+            {item.text}
+          </div>
+        ))}
+      </div>
+      <div className="sidebar-section">
+        <p className="sidebar-tab-header">SETTINGS</p>
+        {settings.map((item, i) => (
+          <div key={i} className="sidebar-tab">
+            <img src={item.img} alt={item.text} />
+            {item.text}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
