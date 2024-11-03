@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, ReactNode } from "react";
 import NavBar from "../navbar/Navbar";
 import Sidebar from "../sideBar/Sidebar";
-
 import "./style.scss";
 
-const Layout = ({ children }: any) => {
-  const [showSide, setShowSide] = useState(false);
+interface LayoutProps {
+  children: ReactNode;
+}
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const [showSide, setShowSide] = useState<boolean>(false);
 
   return (
     <div className="layout-container">

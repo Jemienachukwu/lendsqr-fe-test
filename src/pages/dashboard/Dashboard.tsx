@@ -50,9 +50,8 @@ const Dashboard: React.FC = () => {
 
   const [filter, setFilter] = useState<boolean>(false);
   const [data, setData] = useState<User[]>([]);
-  const [clickedIndex, setClickedIndex] = useState<{ [key: string]: boolean }>(
-    {}
-  );
+  const [clickedIndex, setClickedIndex] = useState<string | null>(null);
+
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [postsPerPage, setPostsPerPage] = useState<number>(10);
   const [filteredData, setFilteredData] = useState<User[]>([]);
@@ -66,11 +65,9 @@ const Dashboard: React.FC = () => {
   const handleApplyFilter = (newFilterData: FilterData) => {
     setFilterData(newFilterData);
   };
+
   const handleClick = (id: string) => () => {
-    setClickedIndex((state) => ({
-      ...state,
-      [id]: !state[id],
-    }));
+    setClickedIndex((prev) => (prev === id ? null : id));
   };
 
   useEffect(() => {
@@ -152,16 +149,8 @@ const Dashboard: React.FC = () => {
               />
               <p className="users-details-title">{item.title}</p>
               <p className="users-details-data">{item.number}</p>
-              dummy text 1
-              <div
-                style={{ background: "green", height: "29px", width: "100px" }}
-              ></div>
             </div>
           ))}
-          dummy text
-          <div
-            style={{ background: "red", height: "29px", width: "100px" }}
-          ></div>
         </div>
 
         <div className="dashboard-table-container">
@@ -208,7 +197,7 @@ const Dashboard: React.FC = () => {
                   <td>
                     <Filter
                       filterData={filterData}
-                      setFilterData={setFilterData} // Add setFilterData prop
+                      setFilterData={setFilterData}
                       onApplyFilter={handleApplyFilter}
                       onResetFilter={handleResetFilter}
                       setFilter={setFilter}
@@ -216,47 +205,86 @@ const Dashboard: React.FC = () => {
                   </td>
                 </tr>
               )}
-              {currentPosts.map((user) => {
-                const { status, style } = getUserStatus(user.lastActiveDate);
-                return (
-                  <tr key={user.id}>
-                    <td>{user.orgName}</td>
-                    <td>{user.userName}</td>
-                    <td>{user.email}</td>
-                    <td>{user.phoneNumber}</td>
-                    <td>{moment(user.createdAt).format("lll")}</td>
-                    <td>
-                      <div className={`dashboard-status ${style}`}>
-                        {status}
-                      </div>
-                    </td>
-                    <td className="status">
-                      {clickedIndex[user.id] && (
-                        <div className="option">
-                          <UserOptions id={user.id} />
-                        </div>
-                      )}
-                      <span
-                        onClick={handleClick(user.id)}
-                        className="option-btn"
+              {currentPosts.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan={6}
+                    style={{
+                      textAlign: "center",
+                      padding: "20px",
+                      color: "#6c757d",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "10px",
+                      }}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="currentColor"
+                        className="bi bi-search"
+                        viewBox="0 0 16 16"
+                        style={{ color: "#6c757d" }}
                       >
-                        <svg
-                          width="20"
-                          height="20"
-                          viewBox="0 0 20 20"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M9.99992 6.1111C10.9221 6.1111 11.6666 5.36666 11.6666 4.44444C11.6666 3.52222 10.9221 2.77777 9.99992 2.77777C9.0777 2.77777 8.33325 3.52222 8.33325 4.44444C8.33325 5.36666 9.0777 6.1111 9.99992 6.1111ZM9.99992 8.33333C9.0777 8.33333 8.33325 9.07777 8.33325 9.99999C8.33325 10.9222 9.0777 11.6667 9.99992 11.6667C10.9221 11.6667 11.6666 10.9222 11.6666 9.99999C11.6666 9.07777 10.9221 8.33333 9.99992 8.33333ZM9.99992 13.8889C9.0777 13.8889 8.33325 14.6333 8.33325 15.5555C8.33325 16.4778 9.0777 17.2222 9.99992 17.2222C10.9221 17.2222 11.6666 16.4778 11.6666 15.5555C11.6666 14.6333 10.9221 13.8889 9.99992 13.8889Z"
-                            fill="#545F7D"
-                          />
-                        </svg>
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zm-5.442-9.344a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11z" />
+                      </svg>
+                      <span style={{ fontSize: "1rem", fontWeight: "500" }}>
+                        No matching records found
                       </span>
-                    </td>
-                  </tr>
-                );
-              })}
+                    </div>
+                  </td>
+                </tr>
+              ) : (
+                currentPosts.map((user) => {
+                  const { status, style } = getUserStatus(user.lastActiveDate);
+                  return (
+                    <tr key={user.id}>
+                      <td>{user.orgName}</td>
+                      <td>{user.userName}</td>
+                      <td>{user.email}</td>
+                      <td>{user.phoneNumber}</td>
+                      <td>{moment(user.createdAt).format("lll")}</td>
+                      <td>
+                        <div className={`dashboard-status ${style}`}>
+                          {status}
+                        </div>
+                      </td>
+                      <td className="status">
+                        {clickedIndex === user.id && (
+                          <div className="option">
+                            <UserOptions id={user.id} />
+                          </div>
+                        )}
+                      </td>
+                      <td>
+                        <span
+                          onClick={handleClick(user.id)}
+                          className="option-btn"
+                        >
+                          <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M9.99992 6.1111C10.9221 6.1111 11.6666 5.36666 11.6666 4.44444C11.6666 3.52222 10.9221 2.77777 9.99992 2.77777C9.0777 2.77777 8.33325 3.52222 8.33325 4.44444C8.33325 5.36666 9.0777 6.1111 9.99992 6.1111ZM9.99992 8.33333C9.0777 8.33333 8.33325 9.07777 8.33325 9.99999C8.33325 10.9222 9.0777 11.6667 9.99992 11.6667C10.9221 11.6667 11.6666 10.9222 11.6666 9.99999C11.6666 9.07777 10.9221 8.33333 9.99992 8.33333ZM9.99992 13.8889C9.0777 13.8889 8.33325 14.6333 8.33325 15.5555C8.33325 16.4778 9.0777 17.2222 9.99992 17.2222C10.9221 17.2222 11.6666 16.4778 11.6666 15.5555C11.6666 14.6333 10.9221 13.8889 9.99992 13.8889Z"
+                              fill="#545F7D"
+                            />
+                          </svg>
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
             </tbody>
           </table>
         </div>

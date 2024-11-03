@@ -1,42 +1,47 @@
 import React from "react";
 import "./style.scss";
-import badge from "./imgs/badge.png";
-import chat from "./imgs/chart-bar.png";
-import clipboard from "./imgs/clipboard.png";
-import briefcase from "./imgs/briefcase.png";
-import dashboard from "./imgs/home.png";
-import loanReq from "./imgs/loanReq.png";
-import savingProd from "./imgs/savingProd.png";
-import pigggy from "./imgs/pigggy.png";
-import prefrences from "./imgs/prefrences.png";
-import settlements from "./imgs/scroll 1settlements.png";
-import transactions from "./imgs/transaction.png";
-import services from "./imgs/services.png";
-import whitelist from "./imgs/whitelist.png";
-import serviceAcc from "./imgs/serviceAcc.png";
-import guarantors from "./imgs/guarantors.png";
-import users from "./imgs/users.png";
-import users2 from "./imgs/user-times 1karma.png";
-import decisions from "./imgs/Vectordecision.png";
-import fees from "./imgs/Vectorfees.png";
-import loan from "./imgs/Vectorloan.png";
-import vector from "./imgs/Vector.png";
-import avatar from "./imgs/avatar.png";
-import dropDown from "./imgs/dropDown.png";
+import feespricing from "./imgs/feespricing.svg";
+import reports from "./imgs/reports.svg";
+import auditLogs from "./imgs/auditLogs.svg";
+import briefcase from "./imgs/briefcase.svg";
+import dashboard from "./imgs/home.svg";
+import loanReq from "./imgs/loanReq.svg";
+import savingProd from "./imgs/savingprod.svg";
+import pigggy from "./imgs/piggy.svg";
+import prefrences from "./imgs/preferences.svg";
+import settlements from "./imgs/settlements.svg";
+import transactions from "./imgs/transaction.svg";
+import services from "./imgs/services.svg";
+import whitelist from "./imgs/whitelist.svg";
+import serviceAcc from "./imgs/serviceAcc.svg";
+import guarantors from "./imgs/guarantors.svg";
+import users from "./imgs/users.svg";
+import userkarma from "./imgs/userkarma.svg";
+import decisions from "./imgs/Vectordecision.svg";
+import fees from "./imgs/fees.svg";
+import loan from "./imgs/Vectorloan.svg";
+import vector from "./imgs/vector.svg";
+import avatar from "./imgs/image 4.png";
+import dropDown from "./imgs/dropdown.svg";
 
-const Sidebar = () => {
-  const customers = [
+interface SidebarItem {
+  text: string;
+  img: string;
+}
+
+const Sidebar: React.FC = () => {
+  const customers: SidebarItem[] = [
     { text: "Users", img: users },
     { text: "Guarantors", img: guarantors },
-    { text: "Loan", img: loan },
+    { text: "Loans", img: loan },
     { text: "Decision Models", img: decisions },
     { text: "Savings", img: pigggy },
     { text: "Loan Requests", img: loanReq },
-    { text: "Decision Models", img: decisions },
     { text: "Whitelist", img: whitelist },
-    { text: "Karma", img: users2 },
+    { text: "Karma", img: userkarma },
   ];
-  const businesses = [
+
+  const businesses: SidebarItem[] = [
     { text: "Organisation", img: briefcase },
     { text: "Loan Product", img: loanReq },
     { text: "Savings Products", img: savingProd },
@@ -45,13 +50,15 @@ const Sidebar = () => {
     { text: "Services", img: services },
     { text: "Service Account", img: serviceAcc },
     { text: "Settlements", img: settlements },
-    { text: "Reports", img: chat },
+    { text: "Reports", img: reports },
   ];
-  const settings = [
+
+  const settings: SidebarItem[] = [
     { text: "Prefrences", img: prefrences },
-    { text: "Fees and Pricing", img: badge },
-    { text: "Audit Logs", img: clipboard },
+    { text: "Fees and Pricing", img: feespricing },
+    { text: "Audit Logs", img: auditLogs },
   ];
+
   return (
     <div className="sidebar">
       <div className="mobile-utilities">

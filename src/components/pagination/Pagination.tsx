@@ -2,7 +2,6 @@ import PageLink from "./PageLink";
 import "./style.scss";
 import React from "react";
 
-// Define the props type
 interface PaginationProps {
   totalPosts: number;
   postsPerPage: number;
@@ -31,25 +30,21 @@ const Pagination: React.FC<PaginationProps> = ({
   const previous = () => setCurrentPage(currentPage - 1);
 
   const changePostsPerPage = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPostPerPage(Number(e.target.value)); // Ensure value is a number
+    setPostPerPage(Number(e.target.value));
   };
 
-  // Generate pagination numbers with ellipsis
   const generatePagination = () => {
     const pagination: (number | string)[] = [];
 
     if (totalPages <= 5) {
       pagination.push(...pageNums);
     } else {
-      // Always show the first page
       pagination.push(1);
 
-      // Show ellipsis if needed
       if (currentPage > 3) {
         pagination.push("...");
       }
 
-      // Show pages around the current page
       const startPage = Math.max(2, currentPage - 1);
       const endPage = Math.min(totalPages - 1, currentPage + 2);
 
@@ -57,12 +52,10 @@ const Pagination: React.FC<PaginationProps> = ({
         pagination.push(i);
       }
 
-      // Show ellipsis if needed
       if (currentPage < totalPages - 2) {
         pagination.push("...");
       }
 
-      // Always show the last page
       pagination.push(totalPages);
     }
 

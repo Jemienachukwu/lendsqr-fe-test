@@ -53,7 +53,6 @@ const Filter: React.FC<FilterProps> = ({
       status: "",
     });
   };
-  console.log();
 
   return (
     <div className="filter">
@@ -64,7 +63,7 @@ const Filter: React.FC<FilterProps> = ({
             id="organization"
             type="text"
             name="organization"
-            placeholder="User"
+            placeholder="organization"
             value={formData.organization}
             onChange={handleChange}
           />
