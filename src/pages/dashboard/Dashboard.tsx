@@ -32,11 +32,11 @@ interface FilterData {
   status: string;
 }
 
-interface UserInfo {
-  img: string;
-  title: string;
-  number: string;
-}
+// interface UserInfo {
+//   img: string;
+//   title: string;
+//   number: string;
+// }
 
 const Dashboard: React.FC = () => {
   const initialFilterData: FilterData = {
@@ -130,12 +130,13 @@ const Dashboard: React.FC = () => {
       return { status: "Blacklist", style: "blacklist" };
     }
   };
-  const usersInfo: UserInfo[] = [
+  const usersInfo = [
     { img: totalusers, title: "USERS", number: "2,453" },
     { img: activeusers, title: "ACTIVE USERS", number: "2,453" },
     { img: userLoan, title: "USERS WITH LOAN", number: "12,453" },
     { img: usersaving, title: "USERS WITH SAVINGS", number: "102,453" },
   ];
+
   return (
     <Layout>
       <div className="dashboard">
