@@ -32,11 +32,11 @@ interface FilterData {
   status: string;
 }
 
-// interface UserInfo {
-//   img: string;
-//   title: string;
-//   number: string;
-// }
+interface UserInfo {
+  img: string;
+  title: string;
+  number: string;
+}
 
 const Dashboard: React.FC = () => {
   const initialFilterData: FilterData = {
@@ -130,7 +130,7 @@ const Dashboard: React.FC = () => {
       return { status: "Blacklist", style: "blacklist" };
     }
   };
-  const usersInfo = [
+  const usersInfo: UserInfo[] = [
     { img: totalusers, title: "USERS", number: "2,453" },
     { img: activeusers, title: "ACTIVE USERS", number: "2,453" },
     { img: userLoan, title: "USERS WITH LOAN", number: "12,453" },
@@ -152,8 +152,16 @@ const Dashboard: React.FC = () => {
               />
               <p className="users-details-title">{item.title}</p>
               <p className="users-details-data">{item.number}</p>
+              dummy text 1
+              <div
+                style={{ background: "green", height: "29px", width: "100px" }}
+              ></div>
             </div>
           ))}
+          dummy text
+          <div
+            style={{ background: "red", height: "29px", width: "100px" }}
+          ></div>
         </div>
 
         <div className="dashboard-table-container">
@@ -252,16 +260,15 @@ const Dashboard: React.FC = () => {
             </tbody>
           </table>
         </div>
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={filteredData.length}
+          paginate={paginate}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          setPostPerPage={setPostsPerPage}
+        />
       </div>
-
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={filteredData.length}
-        paginate={paginate}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        setPostPerPage={setPostsPerPage}
-      />
     </Layout>
   );
 };
