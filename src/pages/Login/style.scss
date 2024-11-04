@@ -79,13 +79,15 @@
     .login-inputeContainer {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      width: 447px;
       @media (max-width: 600px) {
         width: 100%;
       }
       .password-container {
         position: relative;
-        p {
+        max-width: 100%;
+        margin-top: 24px;
+        .password-state {
           position: absolute;
           cursor: pointer;
           right: 15px;
@@ -120,6 +122,16 @@
         }
       }
     }
+    .error-message {
+      color: #ff4d4d;
+      font-size: 12px;
+      font-weight: 500;
+      margin-top: 0;
+      text-align: left;
+      max-width: 100%;
+      overflow-wrap: break-word;
+    }
+
     .forgotPassword {
       font-family: "Avenir Next LT Pro";
       font-weight: 600;

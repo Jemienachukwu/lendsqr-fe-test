@@ -10,10 +10,34 @@ const Login: React.FC = () => {
   );
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
 
   const isValidEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  };
+
+  const isValidPassword = (password: string) => {
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+    return passwordRegex.test(password);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+    setEmailError(isValidEmail(value) ? "" : "Please enter a valid email.");
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setPassword(value);
+    setPasswordError(
+      isValidPassword(value)
+        ? ""
+        : "Password must contain at least 8 characters, including uppercase, lowercase, a number, and a special character."
+    );
   };
 
   return (
@@ -36,31 +60,49 @@ const Login: React.FC = () => {
               type="email"
               placeholder="Email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleEmailChange}
             />
+            {emailError && <p className="error-message">{emailError}</p>}
             <div className="password-container">
               <input
                 type={showPassword}
                 placeholder="Password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handlePasswordChange}
               />
               {showPassword === "password" ? (
-                <p onClick={() => setShowPassword("text")}>SHOW</p>
+                <p
+                  className="password-state"
+                  onClick={() => setShowPassword("text")}
+                >
+                  SHOW
+                </p>
               ) : (
-                <p onClick={() => setShowPassword("password")}>HIDE</p>
+                <p
+                  className="password-state"
+                  onClick={() => setShowPassword("password")}
+                >
+                  HIDE
+                </p>
               )}
             </div>
+            {passwordError && <p className="error-message">{passwordError}</p>}
           </div>
           <p className="forgotPassword">FORGOT PASSWORD?</p>
           <Link
-            to={isValidEmail(email) && password ? "/dashboard" : "#"}
+            to={
+              isValidEmail(email) && isValidPassword(password)
+                ? "/dashboard"
+                : "#"
+            }
             className="btn-container"
           >
             <button
-              disabled={!isValidEmail(email) || !password}
+              disabled={!isValidEmail(email) || !isValidPassword(password)}
               className={
-                !isValidEmail(email) || !password ? "disabledBtn" : "activeBtn"
+                !isValidEmail(email) || !isValidPassword(password)
+                  ? "disabledBtn"
+                  : "activeBtn"
               }
             >
               LOG IN
