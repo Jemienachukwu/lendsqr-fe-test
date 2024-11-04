@@ -63,6 +63,7 @@ const Filter: React.FC<FilterProps> = ({
             id="organization"
             type="text"
             name="organization"
+            className="organization"
             placeholder="organization"
             value={formData.organization}
             onChange={handleChange}

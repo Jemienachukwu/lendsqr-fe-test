@@ -3,6 +3,7 @@
   height: 100vh;
   overflow-y: auto;
   color: #545f7d;
+  padding-bottom: 30px;
 
   .goback-btn {
     display: flex;
@@ -70,7 +71,7 @@
     box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
     border-radius: 4px;
     @media (max-width: 600px) {
-      padding: 0 20px;
+      padding: 10px 20px 0 20px;
 
       height: fit-content;
     }
@@ -120,7 +121,6 @@
         @media (max-width: 600px) {
           border: none;
           padding: 0px;
-          // width: 40%;
           width: fit-content;
           padding: 10px 20px;
           align-items: start;
@@ -201,7 +201,8 @@
       padding: 20px 0;
     }
     div {
-      width: 200px;
+      min-width: 200px;
+      width: auto;
       p {
         &:first-child {
           font-weight: 400;

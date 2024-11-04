@@ -1,5 +1,4 @@
 import "./style.scss";
-import { Link } from "react-router-dom";
 import avatar from "./imgs/image 4.png";
 import notification from "./imgs/notification.svg";
 import ham from "./imgs/ham.svg";
@@ -46,9 +45,7 @@ const NavBar: React.FC<NavBarProps> = ({ showSide, setShowSide }) => {
           </div>
         </div>
         <div className="utilities">
-          <Link to="#" className="navbar-docs">
-            Docs
-          </Link>
+          <span className="navbar-docs">Docs</span>
 
           <img
             src={notification}

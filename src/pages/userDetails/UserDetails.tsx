@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import fullStar from "./imgs/Vectorfullstart.png";
 import emptyStar from "./imgs/Vectoremptystar.png";
@@ -8,24 +7,24 @@ import Layout from "../../components/layout/Layout";
 import "./style.scss";
 
 interface UserProfile {
-  avatar: string;
-  firstName: string;
-  lastName: string;
-  bvn: string;
-  gender: string;
+  avatar?: string;
+  firstName?: string;
+  lastName?: string;
+  bvn?: string;
+  gender?: string;
   maritalStatus?: string;
   children?: string;
   residence?: string;
 }
 
 interface UserEducation {
-  level: string;
-  employmentStatus: string;
-  sector: string;
-  duration: string;
-  officeEmail: string;
-  monthlyIncome: string[];
-  loanRepayment: string;
+  level?: string;
+  employmentStatus?: string;
+  sector?: string;
+  duration?: string;
+  officeEmail?: string;
+  monthlyIncome?: string[];
+  loanRepayment?: string;
 }
 
 interface UserSocials {
@@ -35,43 +34,41 @@ interface UserSocials {
 }
 
 interface UserGuarantor {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
+  firstName?: string;
+  lastName?: string;
+  phoneNumber?: string;
   email?: string;
   relationship?: string;
 }
 
 interface UserData {
   id: string;
-  accountNumber: string;
-  accountBalance: string;
-  phoneNumber: string;
-  email: string;
+  accountNumber?: string;
+  accountBalance?: string;
+  phoneNumber?: string;
+  email?: string;
   profile: UserProfile;
   education: UserEducation;
   socials: UserSocials;
   guarantor: UserGuarantor;
 }
 
-const UserDetails: React.FC = () => {
-  const { userId } = useParams<{ userId: string }>();
+const useUserData = (userId: string) => {
   const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get<UserData>(
-          `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${userId}`
-        );
-        setUserData(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
+    const storedUser = localStorage.getItem(`user_${userId}`);
+    if (storedUser) {
+      setUserData(JSON.parse(storedUser));
+    }
   }, [userId]);
+
+  return userData;
+};
+
+const UserDetails: React.FC = () => {
+  const { userId } = useParams<{ userId: string }>();
+  const userData = useUserData(userId || "");
 
   const renderField = (label: string, value: string | undefined) => (
     <div className="user-data">
@@ -81,15 +78,20 @@ const UserDetails: React.FC = () => {
   );
 
   const {
-    profile,
-    accountNumber,
-    accountBalance,
-    phoneNumber,
-    email,
-    education,
-    socials,
-    guarantor,
-  } = userData || {};
+    profile = {},
+    accountNumber = "N/A",
+    accountBalance = "N/A",
+    phoneNumber = "N/A",
+    email = "N/A",
+    education = {},
+    socials = {},
+    guarantor = {},
+  } = userData || {
+    profile: {},
+    education: {},
+    socials: {},
+    guarantor: {},
+  }; // Provide defaults for destructuring
 
   return (
     <Layout>
@@ -117,7 +119,7 @@ const UserDetails: React.FC = () => {
               <h3>Blacklist User</h3>
             </button>
             <button className="activate-user">
-              <h3>Activate User </h3>
+              <h3>Activate User</h3>
             </button>
           </div>
         </header>
@@ -128,7 +130,7 @@ const UserDetails: React.FC = () => {
               <img src={avatar} alt="avatar" />
               <div className="profile-username">
                 <h1>
-                  {profile?.firstName} {profile?.lastName}
+                  {profile.firstName || "N/A"} {profile.lastName || "N/A"}
                 </h1>
                 <p>{accountNumber}</p>
               </div>
@@ -145,7 +147,7 @@ const UserDetails: React.FC = () => {
 
             <div className="user-balance">
               <h1>₦{accountBalance}</h1>
-              <p>{profile?.bvn}</p>
+              <p>{profile.bvn || "N/A"}</p>
             </div>
           </div>
           <div className="user-nav">
@@ -169,53 +171,49 @@ const UserDetails: React.FC = () => {
           <div className="userInfo">
             {renderField(
               "FULL NAME",
-              `${profile?.firstName} ${profile?.lastName}`
+              `${profile.firstName || "N/A"} ${profile.lastName || "N/A"}`
             )}
             {renderField("PHONE NUMBER", phoneNumber)}
             {renderField("EMAIL ADDRESS", email)}
-            {renderField("BVN", profile?.bvn)}
-            {renderField("GENDER", profile?.gender)}
+            {renderField("BVN", profile.bvn)}
+            {renderField("GENDER", profile.gender)}
             {renderField("MARITAL STATUS", profile?.maritalStatus || "Single")}
-            {renderField("CHILDREN", profile?.children)}
-            {renderField("Type of Residence", profile?.residence)}
+            {renderField("CHILDREN", profile.children)}
+            {renderField("Type of Residence", profile.residence)}
           </div>
-
           <hr />
-
           <h3>Education and Employment</h3>
           <div className="userInfo">
-            {renderField("LEVEL OF EDUCATION", education?.level)}
-            {renderField("EMPLOYMENT STATUS", education?.employmentStatus)}
-            {renderField("SECTOR OF EMPLOYMENT", education?.sector)}
-            {renderField("DURATION OF EMPLOYMENT", education?.duration)}
-            {renderField("OFFICE EMAIL", education?.officeEmail)}
+            {renderField("LEVEL OF EDUCATION", education.level)}
+            {renderField("EMPLOYMENT STATUS", education.employmentStatus)}
+            {renderField("SECTOR OF EMPLOYMENT", education.sector)}
+            {renderField("DURATION OF EMPLOYMENT", education.duration)}
+            {renderField("OFFICE EMAIL", education.officeEmail)}
             {renderField(
               "MONTHLY INCOME",
-              `₦${education?.monthlyIncome[0]} - ₦${education?.monthlyIncome[1]}`
+              education.monthlyIncome && education.monthlyIncome.length === 2
+                ? `₦${education.monthlyIncome[0]} - ₦${education.monthlyIncome[1]}`
+                : "N/A"
             )}
-            {renderField("LOAN REPAYMENT", `₦${education?.loanRepayment}`)}
+            {renderField("LOAN REPAYMENT", education.loanRepayment)}
           </div>
-
           <hr />
-
           <h3>Socials</h3>
           <div className="userInfo">
-            {renderField("TWITTER", socials?.twitter)}
-            {renderField("FACEBOOK", socials?.facebook)}
-            {renderField("INSTAGRAM", socials?.instagram)}
+            {renderField("TWITTER", socials.twitter)}
+            {renderField("FACEBOOK", socials.facebook)}
+            {renderField("INSTAGRAM", socials.instagram)}
           </div>
-
           <hr />
-
           <h3>Guarantor</h3>
           <div className="userInfo">
             {renderField(
               "FULL NAME",
-              `${guarantor?.firstName} ${guarantor?.lastName}`
+              `${guarantor.firstName || "N/A"} ${guarantor.lastName || "N/A"}`
             )}
-            {renderField("PHONE NUMBER", guarantor?.phoneNumber)}
-            {renderField("EMAIL", guarantor?.email)}
-            {renderField("RELATIONSHIP", guarantor?.relationship)}
+            {renderField("PHONE NUMBER", guarantor.phoneNumber)}
+            {renderField("EMAIL", guarantor.email)}
+            {renderField("RELATIONSHIP", guarantor.relationship)}
           </div>
         </section>
       </div>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import moment from "moment";
 
+import moment from "moment";
 import totalusers from "./imgs/totaluser.svg";
 import activeusers from "./imgs/activeusers.svg";
 import userLoan from "./imgs/usersloan.svg";
@@ -66,22 +65,35 @@ const Dashboard: React.FC = () => {
     setFilterData(newFilterData);
   };
 
-  const handleClick = (id: string) => () => {
-    setClickedIndex((prev) => (prev === id ? null : id));
-  };
-
   useEffect(() => {
-    axios
-      .get<User[]>(
-        "https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users"
-      )
+    fetch("https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
       .then((res) => {
-        setData(res.data);
-        setFilteredData(res.data);
+        setData(res);
+        setFilteredData(res);
       })
       .catch((err) => console.error("Error fetching data:", err));
   }, []);
+  const getUserStatus = (lastActiveDate: string) => {
+    const lastActive = moment(lastActiveDate);
+    const now = moment();
+    const daysDifference = now.diff(lastActive, "days");
 
+    if (daysDifference <= 7) {
+      return { status: "Active", style: "active" };
+    } else if (daysDifference <= 30) {
+      return { status: "Pending", style: "pending" };
+    } else if (daysDifference <= 90) {
+      return { status: "Inactive", style: "inactive" };
+    } else {
+      return { status: "Blacklist", style: "blacklist" };
+    }
+  };
   useEffect(() => {
     const filtered = data.filter((user) => {
       return (
@@ -112,28 +124,20 @@ const Dashboard: React.FC = () => {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  const getUserStatus = (lastActiveDate: string) => {
-    const lastActive = moment(lastActiveDate);
-    const now = moment();
-    const daysDifference = now.diff(lastActive, "days");
-
-    if (daysDifference <= 7) {
-      return { status: "Active", style: "active" };
-    } else if (daysDifference <= 30) {
-      return { status: "Pending", style: "pending" };
-    } else if (daysDifference <= 90) {
-      return { status: "Inactive", style: "inactive" };
-    } else {
-      return { status: "Blacklist", style: "blacklist" };
-    }
-  };
   const usersInfo: UserInfo[] = [
     { img: totalusers, title: "USERS", number: "2,453" },
     { img: activeusers, title: "ACTIVE USERS", number: "2,453" },
     { img: userLoan, title: "USERS WITH LOAN", number: "12,453" },
     { img: usersaving, title: "USERS WITH SAVINGS", number: "102,453" },
   ];
+  const handleClick = (id: string) => () => {
+    const clickedUser = data.find((user) => user.id === id);
+    if (clickedUser) {
+      localStorage.setItem(`user_${id}`, JSON.stringify(clickedUser));
+    }
 
+    setClickedIndex((prev) => (prev === id ? null : id));
+  };
   return (
     <Layout>
       <div className="dashboard">
@@ -266,6 +270,7 @@ const Dashboard: React.FC = () => {
                         <span
                           onClick={handleClick(user.id)}
                           className="option-btn"
+                          id="option-btn"
                         >
                           <svg
                             width="20"

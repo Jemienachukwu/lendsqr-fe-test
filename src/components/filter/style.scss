@@ -8,8 +8,6 @@
   border-radius: 4px;
 
   form {
-    left: 358px;
-    top: 488px;
     border-radius: 4px;
     .filter-inputes {
       display: flex;
@@ -49,16 +47,16 @@
     .filter-buttonContainer {
       display: flex;
       gap: 14px;
+      width: 230px;
       .filter-resetBtn {
-        width: 98px;
+        width: 49%;
         height: 40px;
         border: 1px solid #545f7d;
         border-radius: 8px;
       }
       .filter-filterBtn {
-        width: 98px;
         height: 40px;
-
+        width: 49%;
         color: #ffffff;
         background: #39cdcc;
         border: 1px solid #39cdcc;

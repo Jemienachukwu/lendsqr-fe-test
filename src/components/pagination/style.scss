@@ -13,11 +13,8 @@
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 16px;
     color: #545f7d;
-    @media (max-width: 550px) {
-      margin-bottom: 20px;
-    }
+
     select {
       background: rgba(33, 63, 125, 0.1);
       border-radius: 4px;

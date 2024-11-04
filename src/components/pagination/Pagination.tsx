@@ -1,6 +1,5 @@
-import PageLink from "./PageLink";
+import React, { HTMLProps } from "react";
 import "./style.scss";
-import React from "react";
 
 interface PaginationProps {
   totalPosts: number;
@@ -31,6 +30,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
   const changePostsPerPage = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPostPerPage(Number(e.target.value));
+    setCurrentPage(1);
   };
 
   const generatePagination = () => {
@@ -66,7 +66,7 @@ const Pagination: React.FC<PaginationProps> = ({
     <div className="pagination-main">
       <div className="pagination-displayCount">
         Showing
-        <select onChange={changePostsPerPage}>
+        <select onChange={changePostsPerPage} value={postsPerPage}>
           <option value="10">10</option>
           <option value="20">20</option>
           <option value="50">50</option>
@@ -76,6 +76,7 @@ const Pagination: React.FC<PaginationProps> = ({
       </div>
       <nav className="pagination" aria-label="Pagination">
         <PageLink
+          id="prev-button"
           disabled={currentPage <= 1}
           onClick={previous}
           className="navigationTag"
@@ -96,6 +97,7 @@ const Pagination: React.FC<PaginationProps> = ({
           </PageLink>
         ))}
         <PageLink
+          id="next-button"
           disabled={currentPage >= totalPages}
           onClick={next}
           className="navigationTag"
@@ -104,6 +106,34 @@ const Pagination: React.FC<PaginationProps> = ({
         </PageLink>
       </nav>
     </div>
+  );
+};
+
+export type PageLinkProps = HTMLProps<HTMLAnchorElement> & { active?: boolean };
+
+const PageLink: React.FC<PageLinkProps> = ({
+  className = "",
+  active,
+  disabled,
+  children,
+  ...otherProps
+}) => {
+  const customClassName = `page-link ${className} ${active ? "active" : ""} ${
+    disabled ? "disabled" : ""
+  }`.trim();
+
+  if (disabled) {
+    return <span className={customClassName}>{children}</span>;
+  }
+
+  return (
+    <a
+      className={customClassName}
+      aria-current={active ? "page" : undefined}
+      {...otherProps}
+    >
+      {children}
+    </a>
   );
 };
 

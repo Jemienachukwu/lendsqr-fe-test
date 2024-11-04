@@ -11,6 +11,11 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   return (
     <div className="login">
       <div className="login-logo">
@@ -48,10 +53,15 @@ const Login: React.FC = () => {
             </div>
           </div>
           <p className="forgotPassword">FORGOT PASSWORD?</p>
-          <Link to="/dashboard" className="btn-container">
+          <Link
+            to={isValidEmail(email) && password ? "/dashboard" : "#"}
+            className="btn-container"
+          >
             <button
-              disabled={!email || !password}
-              className={!email || !password ? "disabledBtn" : "activeBtn"}
+              disabled={!isValidEmail(email) || !password}
+              className={
+                !isValidEmail(email) || !password ? "disabledBtn" : "activeBtn"
+              }
             >
               LOG IN
             </button>
