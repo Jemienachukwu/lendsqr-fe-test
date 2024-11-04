@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, CSSProperties } from "react";
 
 import moment from "moment";
 import totalusers from "./imgs/totaluser.svg";
 import activeusers from "./imgs/activeusers.svg";
 import userLoan from "./imgs/usersloan.svg";
 import usersaving from "./imgs/usersavings.svg";
+import ClipLoader from "react-spinners/ClipLoader";
 
 import Layout from "../../components/layout/Layout";
 import UserOptions from "./UserOptions";
@@ -37,6 +38,13 @@ interface UserInfo {
   number: string;
 }
 
+const override: CSSProperties = {
+  display: "flex",
+  margin: "10px auto",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
 const Dashboard: React.FC = () => {
   const initialFilterData: FilterData = {
     organization: "",
@@ -55,6 +63,7 @@ const Dashboard: React.FC = () => {
   const [postsPerPage, setPostsPerPage] = useState<number>(10);
   const [filteredData, setFilteredData] = useState<User[]>([]);
   const [filterData, setFilterData] = useState<FilterData>(initialFilterData);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const handleResetFilter = () => {
     setFilterData(initialFilterData);
@@ -74,10 +83,14 @@ const Dashboard: React.FC = () => {
         return response.json();
       })
       .then((res) => {
+        setLoading(false);
         setData(res);
         setFilteredData(res);
       })
-      .catch((err) => console.error("Error fetching data:", err));
+      .catch((err) => {
+        setLoading(false);
+        console.error("Error fetching data:", err);
+      });
   }, []);
   const getUserStatus = (lastActiveDate: string) => {
     const lastActive = moment(lastActiveDate);
@@ -196,6 +209,27 @@ const Dashboard: React.FC = () => {
             </thead>
 
             <tbody>
+              {loading === true && (
+                <tr>
+                  <td
+                    colSpan={6}
+                    style={{
+                      textAlign: "center",
+                      padding: "20px",
+                      color: "#6c757d",
+                    }}
+                  >
+                    <ClipLoader
+                      // color={color}
+                      loading={loading}
+                      cssOverride={override}
+                      size={50}
+                      aria-label="Loading Spinner"
+                      data-testid="loader"
+                    />
+                  </td>
+                </tr>
+              )}
               {filter && (
                 <tr className="filter-component">
                   <td>
@@ -209,6 +243,7 @@ const Dashboard: React.FC = () => {
                   </td>
                 </tr>
               )}
+
               {currentPosts.length === 0 ? (
                 <tr>
                   <td
